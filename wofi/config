@@ -1,0 +1,11 @@
+allow_images=true
+hide_scroll=true
+no_actions=false
+term=kitty
+mode=drun
+--show
+width=550
+height=490
+prompt=ソフトウェア
+normal_window=false
+location=center
