@@ -30,6 +30,9 @@ input {
 output "Xiaomi Corporation Mi 30 HFCW 3410300003024" {
     mode "2560x1080@200.000" // Set resolution and refresh rate
     scale 1 // No scaling (use 2 for HiDPI)
+
+    variable-refresh-rate on-demand=true
+    focus-at-startup
 }
 
 output "Samsung Electric Company SyncMaster HVLQ103033" {
@@ -49,7 +52,7 @@ binds {
     // ─── Applications ───
     MOD+RETURN                          hotkey-overlay-title="Open Terminal: kitty" { spawn-sh "kitty"; }
     MOD+SPACE                           hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
-    MOD+B                               hotkey-overlay-title="Open Browser: zen browser" { spawn-sh "bash path/to/zen-browser-nvidia.sh"; }
+    MOD+B                               hotkey-overlay-title="Open Browser: zen browser" { spawn-sh "bash ~/Zero/zen-browser-nvidia.sh"; }
     MOD+ALT+L                           hotkey-overlay-title="Lock Screen: swaylock" { spawn-sh "swaylock"; }
     
     // Please choose your own file manager
@@ -176,7 +179,7 @@ binds {
 // CUSTOM SETTINGS
 gestures {
     hot-corners {
-        off
+        top-right
     }
 }
 
@@ -205,7 +208,7 @@ layer-rule {
 
     spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit
     spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
-    spawn-sh-at-startup "swww img path/to/file" // Set wallpaper
+    spawn-sh-at-startup "swww img ~/Zero/wallpapers/test2.png" // Set wallpaper
     spawn-sh-at-startup "waybar" // Launch waybar
 
     prefer-no-csd // Disable program decorations
@@ -217,7 +220,7 @@ layer-rule {
     layout {
         background-color "transparent"
 
-        gaps 5 // Gap between windows
+        gaps 20 // Gap between windows
         center-focused-column "never" // Don’t auto-center focused column
 
         always-center-single-column
@@ -231,7 +234,9 @@ layer-rule {
 
         focus-ring {
             width 0
-            // active-color "#32c2f0"
+
+            // active-color "#ffc87f"
+            
             active-color 0 0 0 0
             inactive-color 0 0 0 0
         }
@@ -325,7 +330,9 @@ layer-rule {
     window-rule {
         match app-id="org.telegram.desktop"
         match app-id="vesktop"
+        match app-id="discord"
         
+        open-fullscreen true
         open-maximized true
 
         open-on-output "Samsung Electric Company SyncMaster HVLQ103033"
@@ -333,9 +340,11 @@ layer-rule {
 
     window-rule {
         match app-id="fluffychat"
+        match app-id="^steam" title="Сообщение от службы поддержки"
 
         block-out-from "screencast"
     }
+
 
 // ────────────── Environment Variables ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#environment

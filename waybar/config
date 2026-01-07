@@ -3,6 +3,7 @@
 		"layer": "top",
 		"spacing": 4,
 		"exclusive": true,
+
 		"margin-top": 5,
 		"margin-left": 5,
 		"margin-right": 5,
@@ -10,27 +11,141 @@
 
 
 
+
+
 		"modules-left": [
 		"niri/workspaces",
-	    "cpu",
-	    "memory",
-	    "mpris"
+	    "mpris",
+		"group/infocm",
+		"privacy",
 		],
 
 		"modules-center": [
-			"clock"
+			"custom/wofi",
+			"clock",
+			"custom/wlsunset"
 		],
 
 		"modules-right": [
+			"group/speedtest",
+			"temperature#cpu",
+			"bluetooth",
 			"group/info",
-			"custom/sep",
-			"wireplumber"
+			"tray",
+			"custom/poweroff"
 		],
 
 
 
 
+"privacy": {
+	"icon-size": 11,
+	"modules": [
+		{
+			"type": "screenshare",
+			"tooltip": true,
+			"tooltip-icon-size": 8,
+			
+		},
 
+		{
+			"type": "audio-in",
+			"tooltip": true,
+			"tooltip-icon-size": 8
+		}
+	],
+},
+
+
+
+
+
+	    "group/speedtest": {
+	      "modules": ["network#speedtest"]
+	    },
+
+		"network#speedtest": {
+			"interval": 1,
+            "format-ethernet": "  {bandwidthDownBits}     {bandwidthUpBits}",
+            "format-wifi": "  {bandwidthDownBits}     {bandwidthUpBits}",
+            "tooltip": false,
+
+			"on-scroll-up": "",
+            "on-scroll-down": ""
+			
+		},
+
+
+
+"custom/poweroff": {
+	"format": "",
+	"on-click": "poweroff",
+	"tooltip": false
+},
+
+
+"custom/wofi": {
+	"format": "",
+	"on-click": "wofi",
+	"tooltip": false
+},
+
+
+
+
+
+"custom/wlsunset": {
+  "format": "",
+  "format-alt": "",
+  "on-click": "bash -c 'if pgrep -x wlsunset >/dev/null; then pkill wlsunset; else wlsunset -t 4500 & fi'",
+  "tooltip": false
+},
+
+
+
+
+
+		"temperature#cpu": {
+			"format": "  {temperatureC} °C",
+			"thermal-zone": 2,
+			"hwmon-path": "/sys/class/hwmon/hwmon2/coretemp-isa-0000_input",
+
+			"tooltip": false
+		},
+
+
+
+
+"network#connect": {
+  "format-wifi": "󰖩  {ifname}",
+  "format-ethernet": "󰖩  {ifname}",
+  "format-disconnected": "󰌙",
+  "tooltip": true,
+  "tooltip-format-wifi": "Wireless Connection: {ifname}",
+  "tooltip-format-ethernet": "Wired Connection: {ifname}",
+  "tooltip-format-disconnected": "No Connection",
+
+  "on-click": "kitty -e nmtui",
+
+    "on-scroll-up": "",
+    "on-scroll-down": ""
+},
+
+    "bluetooth": {
+        // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+        // "format": "󰂯 {status}",
+        // format-* handles every state, so default format is not necessary.
+        "format-on": "󰂯  no connection",
+		"format-no-controller": "󰂯  no controller",
+        "format-disabled": "", // an empty format will hide the module
+        "format-connected": "󰂯 {device_alias}",
+        // "tooltip-format": "{controller_alias}\t{controller_address}",
+        // "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+
+		"on-click": "blueman-manager",
+    },
 
 // WORKSPACE
 
@@ -49,21 +164,25 @@
 
 	    "group/info": {
 	      "orientation": "inherit",
-	      "drawer": {
-	        "transition-duration": 300,
-	        "transition-right-to-left": true
-	      },
-	      "modules": ["tray"]
+
+	      "modules": ["network#connect", "wireplumber"]
+	    },
+
+
+		"group/infocm": {
+	      "orientation": "inherit",
+
+	      "modules": ["cpu", "memory"]
 	    },
 
 // RAMCPU
 
 	  "memory": {
-	    "format": " 󰣇   {percentage}%"
+	    "format": "  MEM: {percentage}%"
 	  },
 
 	  "cpu": {
-	    "format": " 󰣇   {usage}%"
+	    "format": "CPU: {usage}%"
 	  },
 
 // CLOCK
@@ -71,7 +190,7 @@
 		"clock": {
 			"interval": 1,
 			"format": " {:%I:%M %p} ",
-			"format-alt": " {:%d/%m/%y %I:%M:%S %p} ",
+			"format-alt": " {:%d %B %Y %I:%M:%S %p} ",
 			"tooltip-format": "<tt><small>{calendar}</small></tt>",
 			"calendar": {
 	            "mode"          : "month",
@@ -97,7 +216,7 @@
 
 		"tray": {
 			"icon-size": 12,
-			"spacing": 5,
+			"spacing": 6,
 		},
 
 		"custom/sep": {
@@ -121,7 +240,7 @@
 
 		"wireplumber": {
 			"format": "{icon}",
-			"format-muted": "",
+			"format-muted": "",
 			"tooltip-format": "Volume: {volume}%",
 			"on-click": "pavucontrol",
 			"format-icons": ["", "", ""]
