@@ -1,46 +1,86 @@
 window {
 margin: 0;
-border-radius: 0px;
-border: solid 0px;
-border-color: #080808
 padding: 0;
-background-color: #080808
+
+background-color: transparent;
+
 color: #000000;
 font-family: "Cantarell";
 font-size: 15px;
+
+border-radius: 20;
 }
 
 #input {
 margin: 8px;
-padding: 6px;
+padding: 8px;
 border: none;
-border-radius: 10px;
-background-color: rgba(0,0,0,0.1);
-color: #ffffff;
+
+background-color: transparent;
+color: #aab0b1;
+border-radius: 20;
+
+font-size: 15.5px;
+
 }
 
+
+#input:focus {box-shadow: none;}
+
+
 #entry {
-padding: 8px;
+padding: 15px;
 margin: 4px;
 border-radius: 5px;
 border-color: transparent;
 border: solid 2px;
 border-color: transparent;
-color: #ffffff;
+color: #d3d3d3;
+border-radius: 20;
+
 }
 
 #entry:selected {
-background-color: #151719;
+background-color: #76bfd1;
 border: solid 2px;
 border-color: transparent;
-color: #080808;
+color: #141414;
+
+outline: none;
+border-radius: 20;
 }
 
-#outer-box, #inner-box, #scroll {
+
+
+
+#outer-box {
 margin: 0;
 padding: 0;
-background-color: #080808;
+background-color: #141316;
+border-radius: 20;
+
+border: solid 2px;
+border-color: #87888c;
 }
+
+#inner-box {
+margin: 0;
+padding: 0;
+
+border-radius: 20;
+background-color: transparent;
+}
+
+#scroll {
+margin: 0;
+padding: 0;
+
+background-color: transparent;
+border-radius: 20;
+}
+
+
+
 
 #img {
 margin-right: 8px;

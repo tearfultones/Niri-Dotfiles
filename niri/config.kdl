@@ -54,6 +54,7 @@ binds {
     MOD+SPACE                           hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi"; }
     MOD+B                               hotkey-overlay-title="Open Browser: zen browser" { spawn-sh "bash ~/Zero/zen-browser-nvidia.sh"; }
     MOD+ALT+L                           hotkey-overlay-title="Lock Screen: swaylock" { spawn-sh "swaylock"; }
+    MOD+G                               hotkey-overlay-title="Open Steam" { spawn-sh "steam"; }
     
     // Please choose your own file manager
     MOD+E                             hotkey-overlay-title="File Manager: Nautilus" { spawn-sh "nautilus"; }
@@ -200,16 +201,26 @@ layer-rule {
     block-out-from "screencast"
 }
 
+//workspace "discord" {
+//    open-on-output "Samsung Electric Company SyncMaster HVLQ103033"
+//}
 
+//workspace "telegram" {
+//    open-on-output "Samsung Electric Company SyncMaster HVLQ103033"
+//}
 
 
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
+    spawn-sh-at-startup "swaylock"
+    spawn-sh-at-startup "wl-clip-persist --clipboard regular"
     spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit
     spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
-    spawn-sh-at-startup "swww img ~/Zero/wallpapers/test2.png" // Set wallpaper
+    spawn-sh-at-startup "swww img ~/Zero/wallpapers/32134214.png --transition-type none" // Set wallpaper
     spawn-sh-at-startup "waybar" // Launch waybar
+    spawn-sh-at-startup "kdeconnectd"
+
 
     prefer-no-csd // Disable program decorations
     screenshot-path null // Disable screenshot saving
@@ -220,7 +231,7 @@ layer-rule {
     layout {
         background-color "transparent"
 
-        gaps 20 // Gap between windows
+        gaps 5 // Gap between windows
         center-focused-column "never" // Don’t auto-center focused column
 
         always-center-single-column
@@ -228,17 +239,12 @@ layer-rule {
         preset-column-widths {
             proportion 0.33333
             proportion 0.5
-            // proportion 0.66667
+            proportion 0.66667
             // proportion 1.0
         }
 
         focus-ring {
-            width 0
-
-            // active-color "#ffc87f"
-            
-            active-color 0 0 0 0
-            inactive-color 0 0 0 0
+            off
         }
 
         shadow {
@@ -302,6 +308,7 @@ layer-rule {
     window-rule {
         match app-id="^zen"
         match app-id="^steam"
+        match app-id="^chromium"
 
         open-maximized true
     }
@@ -323,23 +330,34 @@ layer-rule {
 
     window-rule {
         match app-id="org.vinegarhq.Sober" title="Sober"
+        match app-id="org.kde.gwenview"
 
         open-fullscreen true
+        open-on-output "Xiaomi Corporation Mi 30 HFCW 3410300003024"
     }
 
-    window-rule {
-        match app-id="org.telegram.desktop"
-        match app-id="vesktop"
-        match app-id="discord"
-        
-        open-fullscreen true
-        open-maximized true
+    //window-rule {
+    //    match app-id="org.telegram.desktop"
+    //    
+    //    open-maximized true
+    //    open-fullscreen true
+    //
+    //    open-on-workspace "telegram"
+    //}
 
-        open-on-output "Samsung Electric Company SyncMaster HVLQ103033"
-    }
+    //window-rule {
+    //    match app-id="vesktop"
+    //    match app-id="discord"
+    //    
+    //    open-maximized true
+    //    open-fullscreen true
+    //
+    //    open-on-workspace "discord"
+    //}
 
     window-rule {
         match app-id="fluffychat"
+        match app-id="org.telegram.desktop"
         match app-id="^steam" title="Сообщение от службы поддержки"
 
         block-out-from "screencast"
