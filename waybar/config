@@ -88,9 +88,9 @@
 
 "custom/poweroff": {
 	"format": "",
-	"on-click": "poweroff",
-	"on-click-right": "reboot",
-	"on-click-middle": "swaylock",
+	"on-click": "wlogout",
+	// "on-click-right": "reboot",
+	// "on-click-middle": "poweroff",
 	"tooltip": false
 },
 
